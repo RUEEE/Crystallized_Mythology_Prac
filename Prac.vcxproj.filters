@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="3rd">
+      <UniqueIdentifier>{8c3b8859-9800-4567-b033-7c4467d97b93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rd\imgui">
+      <UniqueIdentifier>{dd3a3302-d76d-4f35-b236-b97a8b72c2a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3rd\thp">
+      <UniqueIdentifier>{d4dd6c8d-0580-4abe-a73e-885857f14770}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="launcher">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="game">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{93cc3903-e910-4805-8f03-8b714c98d989}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="3rd\thp\thprac_gui_impl_dx9.cpp">
+      <Filter>3rd\thp</Filter>
+    </ClCompile>
+    <ClCompile Include="3rd\thp\thprac_gui_impl_win32.cpp">
+      <Filter>3rd\thp</Filter>
+    </ClCompile>
+    <ClCompile Include="3rd\thp\thprac_hook.cpp">
+      <Filter>3rd\thp</Filter>
+    </ClCompile>
+    <ClCompile Include="3rd\thp\thprac_load_exe.cpp">
+      <Filter>3rd\thp</Filter>
+    </ClCompile>
+    <ClCompile Include="3rd\thp\utils\utils.cpp">
+      <Filter>3rd\thp</Filter>
+    </ClCompile>
+    <ClCompile Include="3rd\imgui\imgui.cpp">
+      <Filter>3rd\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="3rd\imgui\imgui_demo.cpp">
+      <Filter>3rd\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="3rd\imgui\imgui_draw.cpp">
+      <Filter>3rd\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="3rd\imgui\imgui_impl_dx9.cpp">
+      <Filter>3rd\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="3rd\imgui\imgui_impl_win32.cpp">
+      <Filter>3rd\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="3rd\imgui\imgui_tables.cpp">
+      <Filter>3rd\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="3rd\imgui\imgui_widgets.cpp">
+      <Filter>3rd\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>launcher</Filter>
+    </ClCompile>
+    <ClCompile Include="prac_launch.cpp">
+      <Filter>launcher</Filter>
+    </ClCompile>
+    <ClCompile Include="game_init.cpp">
+      <Filter>game</Filter>
+    </ClCompile>
+    <ClCompile Include="ingame_UI.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="game_locale.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="util_hooks.cpp">
+      <Filter>game</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="3rd\thp\thprac_gui_impl_dx9.h">
+      <Filter>3rd\thp</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\thp\thprac_gui_impl_win32.h">
+      <Filter>3rd\thp</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\thp\thprac_hook.h">
+      <Filter>3rd\thp</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\thp\thprac_load_exe.h">
+      <Filter>3rd\thp</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\thp\utils\utils.h">
+      <Filter>3rd\thp</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\thp\utils\wininternal.h">
+      <Filter>3rd\thp</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\imgui\imconfig.h">
+      <Filter>3rd\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\imgui\imgui.h">
+      <Filter>3rd\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\imgui\imgui_impl_dx9.h">
+      <Filter>3rd\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\imgui\imgui_impl_win32.h">
+      <Filter>3rd\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\imgui\imgui_internal.h">
+      <Filter>3rd\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\imgui\imgui_user.h">
+      <Filter>3rd\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\imgui\imstb_rectpack.h">
+      <Filter>3rd\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\imgui\imstb_textedit.h">
+      <Filter>3rd\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="3rd\imgui\imstb_truetype.h">
+      <Filter>3rd\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="prac_launch.h">
+      <Filter>launcher</Filter>
+    </ClInclude>
+    <ClInclude Include="game_init.h">
+      <Filter>game</Filter>
+    </ClInclude>
+    <ClInclude Include="ingame_UI.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="game_locale.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="util_hooks.h">
+      <Filter>game</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="3rd\imgui\imgui_user.inl">
+      <Filter>3rd\imgui</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Prac.rc">
+      <Filter>资源文件</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon.ico">
+      <Filter>资源文件</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
