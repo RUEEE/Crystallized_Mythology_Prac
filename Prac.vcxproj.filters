@@ -148,6 +148,7 @@
     <None Include="3rd\imgui\imgui_user.inl">
       <Filter>3rd\imgui</Filter>
     </None>
+    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Prac.rc">

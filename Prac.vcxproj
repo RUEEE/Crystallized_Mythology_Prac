@@ -180,6 +180,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="3rd\imgui\imgui_user.inl" />
+    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Prac.rc" />

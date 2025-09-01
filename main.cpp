@@ -101,8 +101,8 @@ int main()
             }
         }
     }
-    LaunchGameDirectly(L"C:\\disk\\touhou\\2nd\\THSG\\thsg.exe");
-    // MessageBoxA(NULL, "没找到有效游戏,请确认\"东方海惠堂rep系统版1.5.exe\"存在", "", MB_OK);
+    // LaunchGameDirectly(L"C:\\disk\\touhou\\2nd\\THSG\\thsg.exe");
+    MessageBoxA(NULL, "没找到有效游戏,请确认\"thsg.exe\"存在(1.03a)", "", MB_OK);
 RET:
     return 0;
 }
