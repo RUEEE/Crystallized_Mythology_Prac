@@ -1,4 +1,4 @@
-#include "game_init.h"
+﻿#include "game_init.h"
 #include "ingame_ui.h"
 #include "3rd/thp/thprac_hook.h"
 #include "3rd/thp/thprac_gui_impl_win32.h"
@@ -40,6 +40,7 @@ struct vec2d
 
 std::vector<const char*> stage_select;
 std::vector<const char*> type_select_1;
+std::vector<const char*> type_select_2;
 
 std::vector<const char*> front_jmps[4];
 std::vector<const char*> latter_jmps[4];
@@ -51,6 +52,29 @@ std::vector<int> boss_disable_lifebar[4];
 std::vector<int> Mboss_jmp_stages[4];
 std::vector<int> Mboss_disable_lifebar[4];
 
+std::vector<int> front_times[4];
+std::vector<int> latter_times[4];
+
+void AddFront(int stage, const char* name, int time)
+{
+    front_jmps[stage].push_back(name);
+    front_times[stage].push_back(time);
+}
+
+void AddLatter(int stage, const char* name, int time)
+{
+    latter_jmps[stage].push_back(name);
+    latter_times[stage].push_back(time);
+}
+
+
+void AddMBossJmp(int stage, const char* name, int boss_stage, int disableLifebar = 0)
+{
+    Mboss_jmps[stage].push_back(name);
+    Mboss_jmp_stages[stage].push_back(boss_stage);
+    Mboss_disable_lifebar[stage].push_back(disableLifebar);
+}
+
 void AddBossJmp(int stage,const char* name,int boss_stage,int disableLifebar = 0)
 {
     boss_jmps[stage].push_back(name);
@@ -61,34 +85,97 @@ void AddBossJmp(int stage,const char* name,int boss_stage,int disableLifebar = 0
 void InitData()
 {
     stage_select = { GetString(u8"stage 1"), GetString(u8"stage 2"),GetString(u8"stage 3"),GetString(u8"stage ex") };
-    type_select_1 = { GetString(u8"ǰ��"), GetString(u8"����boss"),  GetString(u8"���"),  GetString(u8"�ص�boss") };
+    type_select_1 = { GetString(u8"前半"), GetString(u8"道中boss"),  GetString(u8"后半"),  GetString(u8"关底boss") };
+    type_select_2 = { GetString(u8"前半"), GetString(u8"道中boss"),  GetString(u8"关底boss") };
     TODO;
+    AddFront (0, GetString(u8"一前半1"                                           ), 0);
+    AddLatter(0, GetString(u8"一后半1 大蝴蝶"                                    ), 3300);
+    AddLatter(0, GetString(u8"一后半2 妖精阵1"                                   ), 3630);
+    AddLatter(0, GetString(u8"一后半3 妖精阵2"                                   ), 4550);
+    AddLatter(0, GetString(u8"一后半4 闭幕"                                      ), 6600);
+
+    AddFront (1, GetString(u8"二前半1"                                           ), 0);
+    AddFront (1, GetString(u8"二前半2 标题后"                                    ), 1110);
+    AddFront (1, GetString(u8"二前半3 飞行阵1"                                   ), 1990);
+    AddFront (1, GetString(u8"二前半3 大蝴蝶"                                    ), 2630);
+    AddLatter(1, GetString(u8"二后半1 增援"                                      ), 6500);
+    AddLatter(1, GetString(u8"二后半2 大蝴蝶阵"                                  ), 6970);
+    AddLatter(1, GetString(u8"二后半3 飞行阵2"                                   ), 8200);
+    AddLatter(1, GetString(u8"二后半4 闭幕"                                      ), 8930);
     
-    AddBossJmp(0, GetString(u8"һ��"                                         ), 2, 2);
-    AddBossJmp(0, GetString(u8"һ�� ���� ���ϩ`�ɥƥ�ڥ��ȡ�"               ), 3);
-    AddBossJmp(0, GetString(u8"����"                                         ), 4 ,1);
-    AddBossJmp(0, GetString(u8"���� ���� ���R��ˮ�¡�"                       ), 5);
-    AddBossJmp(0, GetString(u8"���� ��� ��ħ�F�δ󵜡�"                     ), 6, 2);
+    AddFront (2, GetString(u8"三前半1"                                           ), 0);
+    AddFront (2, GetString(u8"三前半2 标题后"                                    ), 960);
+    AddFront (2, GetString(u8"三前半3 大蝴蝶"                                    ), 2200);
+    AddFront (2, GetString(u8"三前半3 蓝猫2号"                                   ), 4850);
+    
+    AddFront (3, GetString(u8"ex前半1"                                           ), 0);
+    AddFront (3, GetString(u8"ex前半2 大瀑布"                                    ), 700);
+    AddFront (3, GetString(u8"ex前半3 狙阵"                                      ), 1600);
+    AddFront (3, GetString(u8"ex前半3 各种妖精毛玉"                              ), 2840);
+    AddFront (3, GetString(u8"ex前半4 绕圈大蝴蝶"                                ), 4630);
+    AddLatter(3, GetString(u8"ex后半1 大瀑布"                                    ), 6220);
+    AddLatter(3, GetString(u8"ex后半2 绿狙阵"                                    ), 7100);
+    AddLatter(3, GetString(u8"ex后半3 波粒大蝴蝶"                                ), 8050);
+    AddLatter(3, GetString(u8"ex后半4 闭幕"                                      ), 9550);
 
-    AddBossJmp(1, GetString(u8"һ��"                                         ), 2, 1);
-    AddBossJmp(1, GetString(u8"һ�� Ǭ�� ����ʸ�E�x�΄���"                   ), 3);
-    AddBossJmp(1, GetString(u8"����"                                         ), 4 ,1);
-    AddBossJmp(1, GetString(u8"���� ���� ��ڤ��ڤ�Ӥ΄���"                   ), 5);
-    AddBossJmp(1, GetString(u8"����"                                         ), 6, 1);
-    AddBossJmp(1, GetString(u8"���� ��� ���վӤ�Ҫʯ��"                     ), 7);
-    AddBossJmp(1, GetString(u8"�ķ� ��ȫ���ڤξp���졹"                      ), 8, 2);
-    AddBossJmp(1, GetString(u8"��� �O�� �������ʤ�ѣ����衹"             ), 9, 2);
+    AddMBossJmp(0, GetString(u8"道中非"                                      ), 0, 1);
+    AddMBossJmp(0, GetString(u8"道中符 風神 「八月朔日」"                    ), 1);
+    
+    AddMBossJmp(1, GetString(u8"道中非"                                      ), 0, 1);
+    AddMBossJmp(1, GetString(u8"道中符 雷霆 「霹靂神の花園」"                ), 1);
+    
+    AddMBossJmp(2, GetString(u8"道中非"                                      ), 0, 1);
+    AddMBossJmp(2, GetString(u8"道中符 景符 「燦々威光」"                    ), 1);
+    
+    AddMBossJmp(3, GetString(u8"道中非"                                      ), 0, 1);
+    AddMBossJmp(3, GetString(u8"道中一符 祭儀 「夜半の大宴」"                ), 1);
+    AddMBossJmp(3, GetString(u8"道中一符 風符 「盃返しの山颪」"              ), 2, 2);
+    AddMBossJmp(3, GetString(u8"道中一符 風神 「震天動地」"                  ), 3, 2);
 
-    AddBossJmp(2, GetString(u8"һ��"                                         ), 2, 1);
-    AddBossJmp(2, GetString(u8"һ�� ���� ���ץ�����å��֥��`�ȡ�"           ), 3);
-    AddBossJmp(2, GetString(u8"����"                                         ), 4);
-    AddBossJmp(2, GetString(u8"���� ��E ����̫������������"                 ), 5);
-    AddBossJmp(2, GetString(u8"����"                                         ), 6);
-    AddBossJmp(2, GetString(u8"���� ��Ӱ ������ӭ��`���`��"                 ), 7);
-    AddBossJmp(2, GetString(u8"�ķ�"                                         ), 8);
-    AddBossJmp(2, GetString(u8"�ķ� ���� ���֥��å���δ����֡�"             ), 9);
-    AddBossJmp(2, GetString(u8"��� ���x ���ǥ��饤�ȥե�쥤��"           ), 10);
-    AddBossJmp(2, GetString(u8"���� ���ץꥺ�ޥƥ�����ߥ������`��"          ), 11);
+    AddBossJmp(0, GetString(u8"一非"                                         ), 2, 2);
+    AddBossJmp(0, GetString(u8"一符 嵐符 「ハードテンペスト」"               ), 3);
+    AddBossJmp(0, GetString(u8"二非"                                         ), 4 ,1);
+    AddBossJmp(0, GetString(u8"二符 幻想 「鏡花水月」"                       ), 5);
+    AddBossJmp(0, GetString(u8"三符 外道 「魔縁の大禍」"                     ), 6, 2);
+
+    AddBossJmp(1, GetString(u8"一非"                                         ), 2, 1);
+    AddBossJmp(1, GetString(u8"一符 乾坤 「嚆矢濫觴の剣」"                   ), 3);
+    AddBossJmp(1, GetString(u8"二非"                                         ), 4 ,1);
+    AddBossJmp(1, GetString(u8"二符 摂理 「冥助冥加の剣」"                   ), 5);
+    AddBossJmp(1, GetString(u8"三非"                                         ), 6, 1);
+    AddBossJmp(1, GetString(u8"三符 天符 「空居の要石」"                     ), 7);
+    AddBossJmp(1, GetString(u8"四符 「全存在の緋想天」"                      ), 8, 2);
+    AddBossJmp(1, GetString(u8"五符 極光 「世界を彩る眩き光よ」"             ), 9, 2);
+
+    AddBossJmp(2, GetString(u8"一非"                                         ), 2, 1);
+    AddBossJmp(2, GetString(u8"一符 創符 「プログレッシブダート」"           ), 3);
+    AddBossJmp(2, GetString(u8"二非"                                         ), 4);
+    AddBossJmp(2, GetString(u8"二符 氾濫 「大太法師の足禊」"                 ), 5);
+    AddBossJmp(2, GetString(u8"三非"                                         ), 6);
+    AddBossJmp(2, GetString(u8"三符 幻影 「御来迎レーザー」"                 ), 7);
+    AddBossJmp(2, GetString(u8"四非"                                         ), 8);
+    AddBossJmp(2, GetString(u8"四符 虚像 「ブロッケンの大妖怪」"             ), 9);
+    AddBossJmp(2, GetString(u8"五符 光輝 「ディライトフルレイン」"           ), 10);
+    AddBossJmp(2, GetString(u8"六符 「プリズマティカルミソロジー」"          ), 11);
+
+
+    AddBossJmp(3, GetString(u8"一非"                                       ), 4, 1);
+    AddBossJmp(3, GetString(u8"一符 風神 「天狗礫」"                       ), 5);
+    AddBossJmp(3, GetString(u8"二非"                                       ), 6, 1);
+    AddBossJmp(3, GetString(u8"二符 想惟 「彼岸花の川流れ」"               ), 7);
+    AddBossJmp(3, GetString(u8"三非"                                       ), 8, 1);
+    AddBossJmp(3, GetString(u8"三符 白狼 「大神弾き」"                     ), 9);
+    AddBossJmp(3, GetString(u8"四非"                                       ), 10, 1);
+    AddBossJmp(3, GetString(u8"四符 源符 「飛鳥川の淵瀬」"                 ), 11);
+    AddBossJmp(3, GetString(u8"五非"                                       ), 12, 1);
+    AddBossJmp(3, GetString(u8"五符 風神 「天狗の漁撈」"                   ), 13);
+    AddBossJmp(3, GetString(u8"六非"                                       ), 14, 1);
+    AddBossJmp(3, GetString(u8"六符 秋霖 「無射の長雨」"                   ), 15);
+    AddBossJmp(3, GetString(u8"七非"                                       ), 16, 1);
+    AddBossJmp(3, GetString(u8"七符 「天道風伯」"                          ), 17);
+    AddBossJmp(3, GetString(u8"八符 滝符 「九天九地の大瀑布」"             ), 18, 2);
+    AddBossJmp(3, GetString(u8"九符 「真 狼牙風々剣」"                     ), 19, 2);
+    AddBossJmp(3, GetString(u8"十符 「浄頗梨審判」"                        ), 20);
 }
 
 void InitGui(IDirect3DDevice9** ppDevice, HWND* phwnd)
@@ -194,10 +281,6 @@ enum Addrs
     BossPos                 = 0x11EA798,
 };
 
-bool IsInPrac()
-{
-    return I32_2(GameType) == 2;
-}
 
 enum JmpType
 {
@@ -221,45 +304,32 @@ struct PracParam
 }pracParam;
 
 
+bool IsInPrac()
+{
+    if (I32_2(GameType) == 2)
+        return true;
+    if (I32_2(GameType) == 3)//rep
+    {
+        return pracParam.mode;
+    }
+}
 
 
 JmpType GetJmpType(int stage, int type)
 {
     JmpType normal[] = { JFront,JMBoss,JLatter,JBoss };
-    return normal[type];
+    JmpType no_latter[] = { JFront,JMBoss,JBoss };
+    if(stage!=2)
+        return normal[type];
+    return no_latter[type];
 }
-
-// void InsertLatterJmpData(int stage, const char* name, int time)
-// {
-//     latter_jmps[stage].push_back((const char*)name);
-//     latter_time[stage].push_back(time);
-// }
-// void InsertFrontJmpData(int stage, const char* name, int time)
-// {
-//     front_jmps[stage].push_back((const char*)name);
-//     front_time[stage].push_back(time);
-// }
-// 
-// void InsertBossJmpData(int stage, const char* name, int state, bool createbs = true)
-// {
-//     boss_jmps[stage].push_back((const char*)name);
-//     boss_jmps_boss_state[stage].push_back(state);
-//     boss_need_create[stage].push_back(createbs);
-// }
-// 
-// void InsertMBossJmpData(int stage, const char* name, int state, bool createbs = true)
-// {
-//     Mboss_jmps[stage].push_back((const char*)name);
-//     Mboss_jmps_boss_state[stage].push_back(state);
-//     Mboss_need_create[stage].push_back(createbs);
-// }
 
 
 class THOverlay : public GameGuiWnd {
     THOverlay() noexcept
     {
         SetTitle("Mod Menu");
-        SetFade(0.1f, 0.5f);
+        SetFade(0.9f, 0.5f);
         SetPos(10.0f, 10.0f);
         SetSize(0.0f, 0.0f);
         SetWndFlag(
@@ -284,6 +354,7 @@ protected:
     virtual void OnContentUpdate() override
     {
         ImGui::Text("gametime: %d", I32_2(0x11A96E4));
+        ImGui::Text("pracmode: %s", pracParam.mode?"true":"false");
         mMuteki();
         mDisableX();
     }
@@ -301,16 +372,16 @@ protected:
 
     GuiHotKey mMenu{ "ModMenuToggle", "BACKSPACE", VK_BACK };
 
-    GuiHotKey mDisableX{ GetString(u8"����X��"), "F2", VK_F2 };
 
-    HOTKEY_DEFINE(mMuteki, GetString(u8"�޵�"), "F1", VK_F1)
+    HOTKEY_DEFINE(mMuteki, GetString(u8"无敌"), "F1", VK_F1)
     PATCH_HK(0x357A0, "00")
     HOTKEY_ENDDEF();
-    // HOTKEY_DEFINE(mDisableX, GetString(u8"����X��"), "F2", VK_F2)
-    // EHOOK_HK(0x0, 1, {
-    // 
-    //     })
-    // HOTKEY_ENDDEF();
+    HOTKEY_DEFINE(mDisableX, GetString(u8"禁用X键"), "F2", VK_F2)
+        EHOOK_HK(0x32E6E, 7, {
+            I32_2(pCtx->Ecx * 4 + RVA2(0xA2E7C0)) = 0;
+            pCtx->Eip = RVA2(0x432E75);
+        })
+    HOTKEY_ENDDEF();
     
 public:
 };
@@ -382,10 +453,12 @@ public:
         bool sel_changed = false;
         sel_changed = mStage();
         if (sel_changed) {
-            mType.SetItems(type_select_1);
+           if(*mStage!=2)
+                mType.SetItems(type_select_1);
+           else
+                mType.SetItems(type_select_2);
         }
         sel_changed |= mType();
-
         if (sel_changed)
         {
             switch (GetJmpType(*mStage, *mType))
@@ -445,6 +518,18 @@ void RenderUpdate()
 }
 
 HOOKSET_DEFINE(Prac)
+EHOOK_DY(Boss_Dlg_Jmp, 0x50788, 7,
+    {
+         if (IsInPrac()) {
+           if ((GetJmpType(pracParam.stage, pracParam.type) == JBoss && I32_2(BossStage) == 2 && I32_2(Stage)!=3 ) ||
+               (GetJmpType(pracParam.stage, pracParam.type) == JBoss && I32_2(BossStage) == 4 && I32_2(Stage) == 3) ||
+               (GetJmpType(pracParam.stage, pracParam.type) == JMBoss && I32_2(BossStage) == 0))
+           {
+                pCtx->Eip = RVA2(0x45078F);
+            }
+        }
+    }
+)
 EHOOK_DY(Boss_Jmp2, 0x458D6, 8,
     {
          if (IsInPrac()) {
@@ -517,9 +602,16 @@ EHOOK_DY(Boss_LifeBar_Disable, 0x45683, 7,
             {
                 I32_2(BossMovement) = 0;
                 VecD2_2(BossPos) = { 192.0,119.95832824707 };
+                // int32_t tot_time = I32_2(TotLifeBarFillTimeArr + 4 * I32_2(BossType));
+                // I32_2(LifeBarFillTime) = tot_time;
+                // I32_2(CurBossLife) = I32_2(TotalLife);
+                I32_2(BossMovement) = 0;
+                VecD2_2(BossPos) = { 192.0,119.95832824707 };
+                int32_t cur_time = I32_2(LifeBarFillTime);
                 int32_t tot_time = I32_2(TotLifeBarFillTimeArr + 4 * I32_2(BossType));
-                I32_2(LifeBarFillTime) = tot_time;
-                I32_2(CurBossLife) = I32_2(TotalLife);
+                if (cur_time < tot_time - 20) {
+                    I32_2(LifeBarFillTime) = tot_time - 20;
+                }
             }
             else if ((GetJmpType(pracParam.stage, pracParam.type) == JBoss
                 && boss_disable_lifebar[pracParam.stage][pracParam.jmp] == 2) ||
@@ -530,8 +622,8 @@ EHOOK_DY(Boss_LifeBar_Disable, 0x45683, 7,
                 VecD2_2(BossPos) = { 192.0,119.95832824707 };
                 int32_t cur_time = I32_2(LifeBarFillTime);
                 int32_t tot_time = I32_2(TotLifeBarFillTimeArr + 4 * I32_2(BossType));
-                if (cur_time < tot_time - 30){
-                    I32_2(LifeBarFillTime) = tot_time - 30;
+                if (cur_time < tot_time - 40){
+                    I32_2(LifeBarFillTime) = tot_time - 40;
                 }
             }
     }
@@ -579,20 +671,29 @@ EHOOK_DY(UI_Prac_Logic, 0x550B7, 1,
 )
 EHOOK_DY(Prac_Param_Set, 0x32C2E, 7,
 {
-    I32_2(HitCountRemain) = pracParam.life + 1;
-    I32_2(BombPeice) = pracParam.bomb;
-    I32_2(Power) = pracParam.power;
-    I32_2(Faith) = pracParam.faith;
-    I32_2(Graze) = pracParam.graze;
-    I32_2(Score) = pracParam.score;
-
-    switch (GetJmpType(pracParam.stage,pracParam.type)) {
-    case JBoss:
-        I32_2(GameTime) = I32_2(BossEnterTime) - 10;
-        break;
-    case JMBoss:
-        I32_2(GameTime) = I32_2(MBossEnterTime) - 10;
-        break;
+    if (IsInPrac())
+    {
+        I32_2(HitCountRemain) = pracParam.life + 1;
+        I32_2(BombPeice) = pracParam.bomb;
+        I32_2(Power) = pracParam.power;
+        I32_2(Faith) = pracParam.faith;
+        I32_2(Graze) = pracParam.graze;
+        I32_2(Score) = pracParam.score;
+    
+        switch (GetJmpType(pracParam.stage, pracParam.type)) {
+        case JFront:
+            I32_2(GameTime) = front_times[pracParam.stage][pracParam.jmp];
+            break;
+        case JLatter:
+            I32_2(GameTime) = latter_times[pracParam.stage][pracParam.jmp];
+            break;
+        case JBoss:
+            I32_2(GameTime) = I32_2(BossEnterTime) - 10;
+            break;
+        case JMBoss:
+            I32_2(GameTime) = I32_2(MBossEnterTime);
+            break;
+        }
     }
 })
 HOOKSET_ENDDEF()
@@ -620,13 +721,6 @@ void InitAll()
 }
 
 HOOKSET_DEFINE(Hook_Init)
-// EHOOK_DY(WindowSz, TODO, 1, {
-//     if (pCtx->Edx == '4')
-//     {
-//         *(double*)(pCtx->Ebp - 0x30) = 3.0;
-//         pCtx->Eip = 0x65307D;
-//     }
-// })
  EHOOK_DY(init_1, 0xAA49F, 1, {
      self->Disable();
      InitAll();
