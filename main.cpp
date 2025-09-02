@@ -77,12 +77,11 @@ std::vector<std::string> game_names = {
 "thsg.exe" ,
 };
 
-//int WINAPI wWinMain(
-//    [[maybe_unused]] HINSTANCE hInstance,
-//    [[maybe_unused]] HINSTANCE hPrevInstance,
-//    PWSTR pCmdLine,
-//    [[maybe_unused]] int nCmdShow)
-int main()
+int WINAPI wWinMain(
+    [[maybe_unused]] HINSTANCE hInstance,
+    [[maybe_unused]] HINSTANCE hPrevInstance,
+    PWSTR pCmdLine,
+    [[maybe_unused]] int nCmdShow)
 {
     VEHHookInit();
     RemoteInit();
