@@ -350,6 +350,7 @@ protected:
         mMenu.SetTextOffsetRel(x_offset_1, x_offset_2);
         mMuteki.SetTextOffsetRel(x_offset_1, x_offset_2);
         mDisableX.SetTextOffsetRel(x_offset_1, x_offset_2);
+        mElBgm.SetTextOffsetRel(x_offset_1, x_offset_2);
     }
     virtual void OnContentUpdate() override
     {
@@ -357,6 +358,7 @@ protected:
         ImGui::Text("pracmode: %s", pracParam.mode?"true":"false");
         mMuteki();
         mDisableX();
+        mElBgm();
     }
     virtual void OnPreUpdate() override
     {
@@ -384,6 +386,7 @@ protected:
     HOTKEY_ENDDEF();
     
 public:
+    GuiHotKey mElBgm{ GetString(u8"永续bgm"), "F3", VK_F3 };
 };
 
 
@@ -517,6 +520,7 @@ void RenderUpdate()
     THOverlay::singleton().Update();
 }
 
+int last_bgm_a = -1, last_bgm_b = -1;
 HOOKSET_DEFINE(Prac)
 EHOOK_DY(Boss_Dlg_Jmp, 0x50788, 7,
     {
@@ -554,14 +558,57 @@ EHOOK_DY(Boss_Jmp2, 0x458D6, 8,
         }
     }
 )
+
 EHOOK_DY(Boss_Bgm, 0x356F1, 1,
     {
         if (IsInPrac()) {
             if (GetJmpType(pracParam.stage, pracParam.type) == JBoss )
             {
                 pCtx->Edi = 1;
+                
+            }
+            if (*THOverlay::singleton().mElBgm)
+            {
+                if (pCtx->Esi == last_bgm_a && pCtx->Edi == last_bgm_b)
+                {
+                    pCtx->Eip = RVA(0x35700);
+                    return;
+                } else {
+                    last_bgm_a = pCtx->Esi;
+                    last_bgm_b = pCtx->Edi;
+                }
+            }
+            else
+            {
+                last_bgm_a = -1;
+                last_bgm_b = -1;
             }
         }
+    }
+)
+
+EHOOK_DY(Boss_Bgm, 0x538F3, 1,
+    {
+        if (IsInPrac()) {
+            if (*THOverlay::singleton().mElBgm)
+            {
+                pCtx->Eip = RVA(0x538FC);
+                return;
+            }
+        }
+    }
+)
+
+EHOOK_DY(Bgm2, 0x3564C, 3,
+    {
+        last_bgm_a = -1;
+        last_bgm_b = -1;
+    }
+)
+EHOOK_DY(Bgm3, 0x3559D, 3,
+    {
+        last_bgm_a = -1;
+        last_bgm_b = -1;
     }
 )
 EHOOK_DY(Boss_Jmp, 0x45627, 1,

@@ -5,6 +5,7 @@
 - 按 **backspace** 后
 + **F1** 可以开无敌
 + **F2** 禁用X键
++ **F3** 永续bgm
 - 进入练习界面后可以选择从各种地方开始(甚至居然有ex，，，)
 - 修复了日文乱码的问题
 
@@ -19,5 +20,7 @@
 **https://github.com/RUEEE/Crystallized_Mythology_Prac**
 **部分功能复制粘贴自THP**
 
+## 25.9.2
+- 加入永续bgm
 
 **蓝狗降临仪式**
