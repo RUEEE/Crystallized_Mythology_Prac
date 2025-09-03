@@ -312,6 +312,7 @@ bool IsInPrac()
     {
         return pracParam.mode;
     }
+    return false;
 }
 
 
