@@ -20,6 +20,9 @@
 **https://github.com/RUEEE/Crystallized_Mythology_Prac**
 **部分功能复制粘贴自THP**
 
+## 25.9.6
+- 修复禁用x键导致崩溃的bug
+
 ## 25.9.3
 - 修复boss跳转bug
 

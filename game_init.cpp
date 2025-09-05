@@ -381,7 +381,7 @@ protected:
     HOTKEY_ENDDEF();
     HOTKEY_DEFINE(mDisableX, GetString(u8"禁用X键"), "F2", VK_F2)
         EHOOK_HK(0x32E6E, 7, {
-            I32_2(pCtx->Ecx * 4 + RVA2(0xA2E7C0)) = 0;
+            *(int32_t*)(pCtx->Ecx * 4 + RVA2(0xA2E7C0)) = 0;
             pCtx->Eip = RVA2(0x432E75);
         })
     HOTKEY_ENDDEF();
