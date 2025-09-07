@@ -156,7 +156,7 @@ void InitData()
     AddBossJmp(2, GetString(u8"四非"                                         ), 8);
     AddBossJmp(2, GetString(u8"四符 虚像 「ブロッケンの大妖怪」"             ), 9);
     AddBossJmp(2, GetString(u8"五符 光輝 「ディライトフルレイン」"           ), 10, 60);
-    AddBossJmp(2, GetString(u8"六符 「プリズマティカルミソロジー」"          ), 11, 80);
+    AddBossJmp(2, GetString(u8"六符 「光と影の神話」"                        ), 11, 80);
 
 
     AddBossJmp(3, GetString(u8"一非"                                       ), 4, 20);
