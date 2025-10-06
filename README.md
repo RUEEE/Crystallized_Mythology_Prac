@@ -17,8 +17,11 @@
 - ???
 
 ## 代码:
-**https://github.com/RUEEE/Crystallized_Mythology_Prac**
+** https://github.com/RUEEE/Crystallized_Mythology_Prac**
 **部分功能复制粘贴自THP**
+
+## 25.10.6
+- 修复全屏渲染问题
 
 ## 25.9.6
 - 修复禁用x键导致崩溃的bug

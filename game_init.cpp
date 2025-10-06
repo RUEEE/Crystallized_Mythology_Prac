@@ -742,7 +742,7 @@ EHOOK_DY(Prac_Param_Set, 0x32C2E, 7,
 HOOKSET_ENDDEF()
 
 HOOKSET_DEFINE(Hook_Update)
-EHOOK_DY(GameGuiRenderUpdate, 0xAA71D, 6, {
+EHOOK_DY(GameGuiRenderUpdate, 0xAA4A6, 1, {
     GameGuiBegin();
     RenderUpdate();
     GameGuiEnd();
